@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,8 @@ using ParkAPI.Repository.IRepository;
 
 namespace ParkAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/nationalparks")]
+    [ApiVersion("2.0")]
     //group for swagger documentation versioning
     [ApiExplorerSettings(GroupName = "ParkOpenAPISpecNP")]
     [ApiController]
@@ -33,13 +35,9 @@ namespace ParkAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetNationalParks()
         {
-            var objList = _npRepo.GetNationalParks();
-            var objDto = new List<NationalParkDto>();
-            foreach (var obj in objList)
-            {
-                objDto.Add(_mapper.Map<NationalParkDto>(obj));
-            }
-            return Ok(objDto);
+            var obj = _npRepo.GetNationalParks().FirstOrDefault();
+          
+            return Ok(obj);
         }
         
     }

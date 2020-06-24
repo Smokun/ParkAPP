@@ -8,7 +8,8 @@ using ParkAPI.Repository.IRepository;
 
 namespace ParkAPI.Controllers
 {
-    [Route("api/Trails")]
+    //[Route("api/Trails")]
+    [Route("api/v{version:apiVersion}/Trails")]
     [ApiController]
     //group for swagger documentation versioning
     //[ApiExplorerSettings(GroupName = "ParkOpenAPISpecTrails")]

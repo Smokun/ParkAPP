@@ -8,7 +8,8 @@ using ParkAPI.Repository.IRepository;
 
 namespace ParkAPI.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/nationalparks")]
     //group for swagger documentation versioning
     //[ApiExplorerSettings(GroupName = "ParkOpenAPISpecNP")]
     [ApiController]
@@ -94,7 +95,7 @@ namespace ParkAPI.Controllers
 
             }
             //route name -> route value -> final values
-            return CreatedAtRoute("GetNationalPark", new { nationalParkId = nationalParkObj.Id}, nationalParkObj);
+            return CreatedAtRoute("GetNationalPark", new { versio=HttpContext.GetRequestedApiVersion().ToString(), nationalParkId = nationalParkObj.Id}, nationalParkObj);
         }
 
         [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
