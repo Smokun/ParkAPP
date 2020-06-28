@@ -46,11 +46,30 @@ namespace ParkAPI.Controllers
         /// <summary>
         /// Get individual trail.
         /// </summary>
-        /// <param name="trailId">The Id of the national Park</param>
+        /// <param name="nationalParkId"></param>
         /// <returns></returns>
+        [HttpGet("[action]/{nationalParkId:int}")]
+        [ProducesResponseType(200, Type = typeof(TrailDto))]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public IActionResult GetTrailInNationalPark(int nationalParkId)
+        {
+            var objList = _trailRepo.GetTrailsInNationalPark(nationalParkId);
+            if (objList == null)
+            {
+                return NotFound();
+            }
+            var objDto = new List<TrailDto>();
+            foreach(var obj in objList)
+            {
+                objDto.Add(_mapper.Map<TrailDto>(obj));
+            }
+           
+            return Ok(objDto);
+
+        }
         [HttpGet("{trailId:int}", Name = "GetTrail")]
         [ProducesResponseType(200, Type = typeof(TrailDto))]
-
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
         public IActionResult GetTrail(int trailId)

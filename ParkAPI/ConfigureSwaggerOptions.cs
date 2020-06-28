@@ -5,7 +5,9 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ParkAPI
@@ -26,6 +28,11 @@ namespace ParkAPI
                     Version = desc.ApiVersion.ToString()
                 } );
             }
+            var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //path of the xml comments file
+            var cmlCommentFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
+            options.IncludeXmlComments(cmlCommentFullPath);
+           
         }
     }
 }

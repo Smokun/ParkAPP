@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using static ParkAPI.Models.Trail;
 
-namespace ParkAPI.Models.Dto
+namespace ParkWeb.Models
 {
-    public class TrailDto
+    public class Trail
     {
-        
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public double Distance { get; set; }
+        public enum DifficulityType { Easy, Moderate, Difficult, Expert }
         public DifficulityType Difficulity { get; set; }
         public int NationalParkId { get; set; }
-        //in dtos we do not need foreighn key refrences
-        public NationalParkDto NationalPark { get; set; }
-
+        
+        public NationalPark NationalPark { get; set; }
     }
 }

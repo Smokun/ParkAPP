@@ -115,7 +115,7 @@ namespace ParkAPI
             app.UseSwaggerUI(options =>
             {
                 foreach (var desc in provider.ApiVersionDescriptions)
-                    options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", desc.GroupName, ToUpperInvariant());
+                    options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", desc.GroupName.ToUpperInvariant());
                 options.RoutePrefix = "";
             });
 
